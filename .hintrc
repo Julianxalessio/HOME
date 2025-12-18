@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "compat-api/html": [
+      "default",
+      {
+        "ignore": [
+          "meta[name=theme-color]"
+        ]
+      }
+    ],
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "border-color: color-mix(in oklab, var(--accent) 30%, var(--card-border))",
+          "color: color-mix(in oklab, var(--accent) 70%, var(--fg))"
+        ]
+      }
+    ]
+  }
+}

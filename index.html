@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>HOME</title>
+        <meta name="description" content="Quick launch hub for my projects and profiles." />
+        <meta name="theme-color" content="#7c5cff" />
+
+        <!-- Favicon -->
+        <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+        <link rel="alternate icon" href="./favicon.svg" />
+        <link rel="mask-icon" href="./favicon.svg" color="#7c5cff" />
+
+        <!-- Styles -->
+        <link rel="preload" href="#" as="style" />
+        <link rel="stylesheet" href="./styles.css" />
+
+        <!-- Open Graph (optional) -->
+        <meta property="og:title" content="HOME" />
+        <meta property="og:description" content="Quick launch hub for my projects and profiles." />
+        <meta property="og:type" content="website" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="brand">
+                <img src="./logo.svg" width="48" height="48" alt="Site logo" class="brand__logo" />
+                <div class="brand__text">
+                    <h1 class="brand__title">HOME</h1>
+                    <p class="brand__tagline">Your quick launch pad</p>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <section aria-labelledby="links-heading">
+                <h2 id="links-heading" class="visually-hidden">Links</h2>
+                <div class="grid">
+                    <a class="card" href="https://www.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open Projektarbeit in a new tab">
+                        <div class="card__content">
+                            <h3 class="card__title">Projektarbeit</h3>
+                            <p class="card__desc">Documentation and overview of the project work.</p>
+                        </div>
+                        <span class="card__chevron" aria-hidden="true">↗</span>
+                    </a>
+
+                    <a class="card" href="https://playground.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open Project Playground in a new tab">
+                        <div class="card__content">
+                            <h3 class="card__title">Project Playground</h3>
+                            <p class="card__desc">A sandbox to test and explore ideas.</p>
+                        </div>
+                        <span class="card__chevron" aria-hidden="true">↗</span>
+                    </a>
+
+                    <a class="card" href="https://code.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open Code Editor in a new tab">
+                        <div class="card__content">
+                            <h3 class="card__title">Code Editor</h3>
+                            <p class="card__desc">Direct access to the online code environment.</p>
+                        </div>
+                        <span class="card__chevron" aria-hidden="true">↗</span>
+                    </a>
+
+                    <a class="card" href="https://ojdanl.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open OJDANL in a new tab">
+                        <div class="card__content">
+                            <h3 class="card__title">OJDANL</h3>
+                            <p class="card__desc">A helpful toolset and resources collection.</p>
+                        </div>
+                        <span class="card__chevron" aria-hidden="true">↗</span>
+                    </a>
+
+                    <a class="card" href="https://me.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open About Me in a new tab">
+                        <div class="card__content">
+                            <h3 class="card__title">About Me</h3>
+                            <p class="card__desc">Learn more about the person behind these projects.</p>
+                        </div>
+                        <span class="card__chevron" aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <p>Built with care • <span class="year" id="year"></span></p>
+        </footer>
+
+        <script>
+            // Update footer year
+            document.getElementById('year').textContent = new Date().getFullYear();
+        </script>
+    </body>
+    </html>

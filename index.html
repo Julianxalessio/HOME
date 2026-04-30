@@ -37,81 +37,7 @@
     <main class="container">
         <section aria-labelledby="links-heading">
             <h2 id="links-heading" class="visually-hidden">Links</h2>
-            <div class="grid">
-                <a class="card" href="https://www.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open Projektarbeit in a new tab">
-                    <div class="card__content">
-                        <h3 class="card__title">Projektarbeit</h3>
-                        <p class="card__desc">Overview of the project work.</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-                <a class="card" href="https://bibliothek.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open Projektarbeit in a new tab">
-                    <div class="card__content">
-                        <h3 class="card__title">Bibliothek</h3>
-                        <p class="card__desc">Documentation of a Java Object Library.</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-                <a class="card" href="https://tictactoe.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open Projektarbeit in a new tab">
-                    <div class="card__content">
-                        <h3 class="card__title">Tic Tac Toe</h3>
-                        <p class="card__desc">Client/Server Tic Tac Toe Game</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-                <a class="card" href="https://playground.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open Project Playground in a new tab">
-                    <div class="card__content">
-                        <h3 class="card__title">Project Playground</h3>
-                        <p class="card__desc">A sandbox to test and explore ideas.</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-                <a class="card" href="https://code.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open Code Editor in a new tab">
-                    <div class="card__content">
-                        <h3 class="card__title">Code Editor</h3>
-                        <p class="card__desc">Direct access to the online code environment.</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-                <a class="card" href="http://144.24.253.207/index.html" target="_blank" rel="noopener noreferrer"
-                    aria-label="Abonemente">
-                    <div class="card__content">
-                        <h3 class="card__title">Abonemente</h3>
-                        <p class="card__desc">Informationservice for registered subsciptions.</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-                <a class="card" href="https://me.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open About Me in a new tab">
-                    <div class="card__content">
-                        <h3 class="card__title">About Me</h3>
-                        <p class="card__desc">Learn more about the person behind these projects.</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-                <a class="card disappear" href="https://ojdanl.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer"
-                    aria-label="Open OJDANL in a new tab">
-                    <div class="card__content">
-                        <h3 class="card__title">OJDANL</h3>
-                        <p class="card__desc">Don't need to talk about this one.</p>
-                    </div>
-                    <span class="card__chevron" aria-hidden="true">↗</span>
-                </a>
-
-
-            </div>
+            <div class="grid"></div>
         </section>
     </main>
 
@@ -121,6 +47,43 @@
 
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
+        const Websites = [
+            { name: "Projektarbeit", url: "https://www.klassenbuch3pa.ch" },
+            { name: "Bibliothek", url: "https://bibliothek.klassenbuch3pa.ch" },
+            { name: "Tic Tac Toe", url: "https://tictactoe.klassenbuch3pa.ch" },
+            { name: "Project Playground", url: "https://playground.klassenbuch3pa.ch" },
+            { name: "Code Editor", url: "https://code.klassenbuch3pa.ch" },
+            { name: "Abonemente", url: "http://144.24.253.207/index.html" },
+            { name: "About Me", url: "https://me.klassenbuch3pa.ch" },
+            { name: "OJDANL", url: "https://ojdanl.klassenbuch3pa.ch" }
+        ];
+        Websites.forEach(site => {
+            element = document.createElement('a');
+            element.classList.add('card');
+            if (site.name === "OJDANL") {
+                element.classList.add('disappear');
+            };
+            element.href = site.url;
+            element.target = "_blank";
+            element.rel = "noopener noreferrer";
+            element.setAttribute('aria-label', `Open ${site.name} in a new tab`);
+            div = document.createElement('div');
+            div.classList.add('card__content');
+            h3 = document.createElement('h3');
+            h3.classList.add('card__title');
+            h3.textContent = site.name;
+            p = document.createElement('p');
+            p.classList.add('card__desc');
+            p.textContent = `Learn more about ${site.name}.`;
+            div.appendChild(h3);
+            div.appendChild(p);
+            element.appendChild(div);
+            chevron = document.createElement('span');
+            chevron.classList.add('card__chevron');
+            chevron.setAttribute('aria-hidden', 'true');
+            element.appendChild(chevron);
+            document.querySelectorAll('.grid')[0].appendChild(element);
+        });
     </script>
 </body>
 

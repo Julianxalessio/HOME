@@ -1,0 +1,101 @@
+{
+    "pages": [
+        {
+            "title": "Code",
+            "description": "Online code editor.",
+            "url": "https://code.sites.lomdev.ch"
+        },
+        {
+            "title": "Home",
+            "description": "Personal home page.",
+            "url": "https://home.sites.lomdev.ch"
+        },
+        {
+            "title": "OJDANL",
+            "description": "OJDANL web service.",
+            "url": "https://ojdanl.sites.lomdev.ch"
+        },
+        {
+            "title": "Project Playground",
+            "description": "Sandbox for testing ideas.",
+            "url": "https://playground.sites.lomdev.ch",
+            "middleware": "basic-auth"
+        },
+        {
+            "title": "Projektarbeit",
+            "description": "Project work overview.",
+            "url": "https://klassenbuch3pa.ch"
+        },
+        {
+            "title": "Foundry",
+            "description": "Foundry game interface.",
+            "url": "https://foundry.sites.lomdev.ch"
+        },
+        {
+            "title": "Vault",
+            "description": "Vault administration.",
+            "url": "https://vault.infra.lomdev.ch",
+            "middleware": "basic-auth"
+        },
+        {
+            "title": "Rancher",
+            "description": "Kubernetes management.",
+            "url": "https://ui.infra.lomdev.ch"
+        },
+        {
+            "title": "Cookbook",
+            "description": "Recipes and meal planning.",
+            "url": "https://cookbook.sites.lomdev.ch"
+        },
+        {
+            "title": "Prometheus",
+            "description": "Metrics monitoring.",
+            "url": "https://prometheus.infra.lomdev.ch",
+            "middleware": "basic-auth"
+        },
+        {
+            "title": "Alertmanager",
+            "description": "Alert management.",
+            "url": "https://alertmanager.infra.lomdev.ch",
+            "middleware": "basic-auth"
+        },
+        {
+            "title": "Nextcloud",
+            "description": "Cloud storage and collaboration.",
+            "url": "https://nextcloud.infra.lomdev.ch"
+        },
+        {
+            "title": "Notes",
+            "description": "Notes on Trilium.",
+            "url": "https://notes.sites.lomdev.ch"
+        },
+        {
+            "title": "Wheel",
+            "description": "Wheel bot service.",
+            "url": "https://wheel.sites.lomdev.ch"
+        },
+        {
+            "title": "Monitor",
+            "description": "Monitoring dashboards.",
+            "url": "https://monitor.infra.lomdev.ch"
+        },
+        {
+            "title": "Kasm",
+            "description": "Workspace portal.",
+            "url": "https://kasm.infra.lomdev.ch",
+            "middleware": "basic-auth"
+        },
+        {
+            "title": "Kasm Ubuntu",
+            "description": "Ubuntu workspace.",
+            "url": "https://kasm-ubuntu.infra.lomdev.ch",
+            "middleware": "basic-auth"
+        },
+        {
+            "title": "Kasm Chrome",
+            "description": "Chrome workspace.",
+            "url": "https://kasm-chrome.infra.lomdev.ch",
+            "middleware": "basic-auth"
+        }
+    ]
+}

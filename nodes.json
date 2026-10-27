@@ -1,0 +1,25 @@
+{
+    "nodes": [
+        {
+            "Name": "sv-01-kube",
+            "Control-Plane or Agent": "Control-Plane",
+            "tailscale ip": "100.64.246.32",
+            "server-location": "London",
+            "oracle-account": "julianlombardo"
+        },
+        {
+            "Name": "sv-02-kube",
+            "Control-Plane or Agent": "Control-Plane",
+            "tailscale ip": "x.x.x.x",
+            "server-location": "Stutgart",
+            "oracle-account": "zwahlendiego"
+        },
+        {
+            "Name": "sv-03-kube",
+            "Control-Plane or Agent": "Control-Plane",
+            "tailscale ip": "100.88.197.28",
+            "server-location": "Zürich",
+            "oracle-account": "tanjalombardo"
+        }
+    ]
+}

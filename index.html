@@ -13,7 +13,6 @@
         <link rel="mask-icon" href="./favicon.svg" color="#7c5cff" />
 
         <!-- Styles -->
-        <link rel="preload" href="#" as="style" />
         <link rel="stylesheet" href="./styles.css" />
 
         <!-- Open Graph (optional) -->
@@ -23,58 +22,42 @@
     </head>
     <body>
         <header class="site-header">
-            <div class="brand">
-                <img src="./logo.svg" width="48" height="48" alt="Site logo" class="brand__logo" />
-                <div class="brand__text">
-                    <h1 class="brand__title">HOME</h1>
-                    <p class="brand__tagline">Your quick launch pad</p>
+            <div class="header__inner">
+                <div class="brand">
+                    <img src="./logo.svg" width="48" height="48" alt="Site logo" class="brand__logo" />
+                    <div class="brand__text">
+                        <p class="brand__eyebrow">PERSONAL DASHBOARD</p>
+                        <h1 class="brand__title">HOME</h1>
+                    </div>
                 </div>
+                <span class="header__status"><span aria-hidden="true"></span> Online</span>
             </div>
         </header>
 
         <main class="container">
+            <section aria-labelledby="nodes-heading">
+                <div class="section-heading">
+                    <div>
+                        <p class="section-heading__eyebrow">K3S</p>
+                        <h2 id="nodes-heading">Nodes</h2>
+                    </div>
+                </div>
+                <div class="grid" id="nodes" aria-live="polite">
+                    <p>Loading nodes...</p>
+                </div>
+            </section>
+        </main>
+
+        <main class="container">
             <section aria-labelledby="links-heading">
-                <h2 id="links-heading" class="visually-hidden">Links</h2>
-                <div class="grid">
-                    <a class="card" href="https://www.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open Projektarbeit in a new tab">
-                        <div class="card__content">
-                            <h3 class="card__title">Projektarbeit</h3>
-                            <p class="card__desc">Overview of the project work.</p>
-                        </div>
-                        <span class="card__chevron" aria-hidden="true">↗</span>
-                    </a>
-
-                    <a class="card" href="https://playground.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open Project Playground in a new tab">
-                        <div class="card__content">
-                            <h3 class="card__title">Project Playground</h3>
-                            <p class="card__desc">A sandbox to test and explore ideas.</p>
-                        </div>
-                        <span class="card__chevron" aria-hidden="true">↗</span>
-                    </a>
-
-                    <a class="card" href="https://code.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open Code Editor in a new tab">
-                        <div class="card__content">
-                            <h3 class="card__title">Code Editor</h3>
-                            <p class="card__desc">Direct access to the online code environment.</p>
-                        </div>
-                        <span class="card__chevron" aria-hidden="true">↗</span>
-                    </a>
-
-                    <a class="card" href="https://ojdanl.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open OJDANL in a new tab">
-                        <div class="card__content">
-                            <h3 class="card__title">OJDANL</h3>
-                            <p class="card__desc">Don't need to talk about this one.</p>
-                        </div>
-                        <span class="card__chevron" aria-hidden="true">↗</span>
-                    </a>
-
-                    <a class="card" href="https://me.klassenbuch3pa.ch" target="_blank" rel="noopener noreferrer" aria-label="Open About Me in a new tab">
-                        <div class="card__content">
-                            <h3 class="card__title">About Me</h3>
-                            <p class="card__desc">Learn more about the person behind these projects.</p>
-                        </div>
-                        <span class="card__chevron" aria-hidden="true">↗</span>
-                    </a>
+                <div class="section-heading">
+                    <div>
+                        <p class="section-heading__eyebrow">Traefik</p>
+                        <h2 id="links-heading">Pages</h2>
+                    </div>
+                </div>
+                <div class="grid" id="pages" aria-live="polite">
+                    <p>Loading pages…</p>
                 </div>
             </section>
         </main>
@@ -84,6 +67,91 @@
         </footer>
 
         <script>
+            const pagesContainer = document.getElementById('pages');
+            const nodesContainer = document.getElementById('nodes');
+
+            function renderCards(container, entries, emptyMessage, type) {
+                if (entries.length === 0) {
+                    container.textContent = emptyMessage;
+                    return;
+                }
+
+                container.replaceChildren(
+                    ...[...entries]
+                        .sort((firstPage, secondPage) =>
+                            (type === 'node' ? firstPage.Name : firstPage.title).localeCompare(
+                                type === 'node' ? secondPage.Name : secondPage.title
+                            )
+                        )
+                        .map((page) => {
+                            const link = document.createElement('a');
+                            link.className = 'card';
+                            if (page.url) {
+                                link.href = page.url;
+                                link.target = '_blank';
+                                link.rel = 'noopener noreferrer';
+                            } else {
+                                link.removeAttribute('href');
+                            }
+                            const title = type === 'node' ? page.Name : page.title;
+                            link.setAttribute('aria-label', page.url
+                                ? `Open ${title} in a new tab`
+                                : title);
+
+                            const content = document.createElement('div');
+                            content.className = 'card__content';
+
+                            const titleElement = document.createElement('h3');
+                            titleElement.className = 'card__title';
+                            titleElement.textContent = title;
+
+                            const description = document.createElement('p');
+                            description.className = 'card__desc';
+                            description.textContent = type === 'node'
+                                ? `${page['server-location']} · ${page['oracle-account']}`
+                                : page.description;
+
+                            const middleware = document.createElement('p');
+                            middleware.className = 'card__middleware';
+                            middleware.textContent = type === 'node'
+                                ? `${page['Control-Plane or Agent']} · ${page['tailscale ip']}`
+                                : `Middleware: ${page.middleware || 'none'}`;
+
+                            const chevron = document.createElement('span');
+                            chevron.className = 'card__chevron';
+                            chevron.setAttribute('aria-hidden', 'true');
+                            chevron.textContent = '↗';
+
+                            content.append(titleElement, description, middleware);
+                            link.append(content, chevron);
+                            return link;
+                        })
+                );
+            }
+
+            function loadData(path, key, container, emptyMessage) {
+                return fetch(path)
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`Could not load ${path} (${response.status})`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    if (!Array.isArray(data[key])) {
+                        throw new Error(`${path} must contain a "${key}" array`);
+                    }
+                    renderCards(container, data[key], emptyMessage, key === 'nodes' ? 'node' : 'page');
+                })
+                .catch((error) => {
+                    console.error(error);
+                    container.textContent = `${key} could not be loaded.`;
+                });
+            }
+
+            loadData('./nodes.json', 'nodes', nodesContainer, 'No nodes configured.');
+            loadData('./pages.json', 'pages', pagesContainer, 'No pages configured.');
+
             document.getElementById('year').textContent = new Date().getFullYear();
         </script>
     </body>

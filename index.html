@@ -116,14 +116,18 @@
                             middleware.textContent = type === 'node'
                                 ? `${page['Control-Plane or Agent']} · ${page['tailscale ip']}`
                                 : `Middleware: ${page.middleware || 'none'}`;
-
-                            const chevron = document.createElement('span');
-                            chevron.className = 'card__chevron';
-                            chevron.setAttribute('aria-hidden', 'true');
-                            chevron.textContent = '↗';
-
+                            
                             content.append(titleElement, description, middleware);
-                            link.append(content, chevron);
+                            link.append(content);
+
+                            if (type === 'page') {
+                                const chevron = document.createElement('span');
+                                chevron.className = 'card__chevron';
+                                chevron.setAttribute('aria-hidden', 'true');
+                                chevron.textContent = '↗';
+                                link.append(chevron);
+                            }
+
                             return link;
                         })
                 );

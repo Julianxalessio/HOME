@@ -86,6 +86,9 @@
                         .map((page) => {
                             const link = document.createElement('a');
                             link.className = 'card';
+                            if (type === 'node') {
+                                link.classList.add('card--node');
+                            }
                             if (page.url) {
                                 link.href = page.url;
                                 link.target = '_blank';
@@ -111,13 +114,41 @@
                                 ? `${page['server-location']} · ${page['oracle-account']}`
                                 : page.description;
 
+                            const addresses = document.createElement('p');
+                            addresses.className = 'card__addresses';
+                            if (type === 'node') {
+                                const publicIp = document.createElement('span');
+                                publicIp.className = 'card__address';
+                                const publicLabel = document.createElement('span');
+                                publicLabel.className = 'card__address-label';
+                                publicLabel.textContent = 'Public';
+                                const publicValue = document.createElement('code');
+                                publicValue.textContent = page['public ip'];
+                                publicIp.append(publicLabel, publicValue);
+
+                                const tailscaleIp = document.createElement('span');
+                                tailscaleIp.className = 'card__address';
+                                const tailscaleLabel = document.createElement('span');
+                                tailscaleLabel.className = 'card__address-label';
+                                tailscaleLabel.textContent = 'Tailscale';
+                                const tailscaleValue = document.createElement('code');
+                                tailscaleValue.textContent = page['tailscale ip'];
+                                tailscaleIp.append(tailscaleLabel, tailscaleValue);
+
+                                addresses.append(publicIp, tailscaleIp);
+                            }
+
                             const middleware = document.createElement('p');
                             middleware.className = 'card__middleware';
                             middleware.textContent = type === 'node'
-                                ? `${page['Control-Plane or Agent']} · ${page['tailscale ip']}`
+                                ? page['Control-Plane or Agent']
                                 : `Middleware: ${page.middleware || 'none'}`;
                             
-                            content.append(titleElement, description, middleware);
+                            content.append(titleElement, description);
+                            if (type === 'node') {
+                                content.append(addresses);
+                            }
+                            content.append(middleware);
                             link.append(content);
 
                             if (type === 'page') {

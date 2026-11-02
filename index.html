@@ -165,7 +165,7 @@
             }
 
             function loadData(path, key, container, emptyMessage) {
-                return fetch(path)
+                return fetch(`${path}?v=3`, { cache: 'no-store' })
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error(`Could not load ${path} (${response.status})`);
@@ -180,7 +180,7 @@
                 })
                 .catch((error) => {
                     console.error(error);
-                    container.textContent = `${key} could not be loaded.`;
+                    container.textContent = `${key} could not be loaded. Check that ${path} is uploaded next to index.html.`;
                 });
             }
 
